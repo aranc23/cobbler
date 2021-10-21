@@ -238,6 +238,7 @@ class Collection:
         # Save the old name and rename object
         oldname = ref.name
         ref.name = newname
+        self.add(ref, with_triggers=with_triggers, save=True)
 
         # for mgmt classes, update all objects that use it
         if ref.COLLECTION_TYPE == "mgmtclass":
@@ -316,7 +317,6 @@ class Collection:
 
         # now delete the old version and add the new one
         self.remove(oldname, with_delete=True, with_triggers=with_triggers)
-        self.add(ref, with_triggers=with_triggers, save=True)
 
     def add(self, ref, save: bool = False, with_copy: bool = False, with_triggers: bool = True, with_sync: bool = True,
             quick_pxe_update: bool = False, check_for_duplicate_names: bool = False):
